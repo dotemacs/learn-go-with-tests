@@ -69,8 +69,9 @@ In addition, to help you work with your code, you should be able to:
 - **View function definition**. If it's still unclear what a function does, you should be able to jump to the source code and try and figure it out yourself.
 - **Find usages of a symbol**. Understanding a function's context can help you make decisions when refactoring.
 
-Mastering your tools will help you concentrate on the code and reduce context switching.
+Савладавање вашег едитора/окружењем за програмирање ће вам помоћи да се концентришете на код док ће те смањите пребацивање контекста (да не тражите горе наведене функционалности када вам затребају, него да их имате "у прстима").
 
-## Wrapping up
 
-At this point, you should have Go installed, an editor available, and some basic tooling in place. Go has a very large ecosystem of third-party products. We have identified a few useful components here. For a more complete list, see [https://awesome-go.com](https://awesome-go.com).
+## Да резимирамо
+
+Ако сте стигли довде, треба да имате Гуо инсталиран, ваш едитор подешен и неке основне алатке спремне за рад. Гоу има веома велики екосистем алатки. Овде смо навелик неколико њих. За потпунију листу, погледајте [https://awesome-go.com](https://awesome-go.com).
