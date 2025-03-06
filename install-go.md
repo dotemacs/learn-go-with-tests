@@ -1,20 +1,21 @@
-# Install Go, set up environment for productivity
+# Инсталирај Гоу (Go), подеси окружење за рад
 
-The official installation instructions for Go are available [here](https://golang.org/doc/install).
 
-## Go Environment
+Званична упутства за гоу су доступна [овде](https://golang.org/doc/install).
 
-### Go Modules
+## Гоу Окружење
 
-Go 1.11 introduced [Modules](https://go.dev/wiki/Modules). This approach is the default build mode since Go 1.16, therefore the use of `GOPATH` is not recommended.
+### Гоу Модули
 
-Modules aim to solve problems related to dependency management, version selection and reproducible builds; they also enable users to run Go code outside of `GOPATH`.
+Гоу 1.11 је додао [Модуле](https://go.dev/wiki/Modules). То је уобичајени начин да се користи/компајлира Гоу од верзије 1.16 па на даље. Што значи да је употреба `GOPATH` (варијабла за окружење, која се користила у ранијим верзијама Гоу, за подешавање Гоу језика) није препоручљиво.
 
-Using Modules is pretty straightforward. Select any directory outside `GOPATH` as the root of your project, and create a new module with the `go mod init` command.
+Модули покушавају да реше проблеме везане за употребу других, екстерних библиотека (које се зову, у Гоу екосистему, у буквалном преводу пакети: packages), њихових разних верзија, тако што омогућавају да се изграде идентични програми сваки пут када се код искомпајлира/изгради. Они такође омогућавају да корисници користе Гоу код ван `GOPATH` варијабле за окружење.
 
-A `go.mod` file will be generated, containing the module path, a Go version, and its dependency requirements, which are the other modules needed for a successful build.
+Употреба модула је једноставана. Изабери неку директоријум ван `GOPATH` варијабле, и направи нови модул са командом: `go mod init`.
 
-If no `<modulepath>` is specified, `go mod init` will try to guess the module path from the directory structure. It can also be overridden by supplying an argument.
+Датотека `go.mod` ће бити исписана, која ће да садржи локацију модула, Гоу верзију и друге модули од који су потребни да би се програм успешно изградио.
+
+Ако `<modulepath>` није наведен, `go mod init` ће покушати да погоди локацију за модул на основу структуре директоријума. Локација може да буде локација по избору, ако се да као аргумент.
 
 ```sh
 mkdir my-project
@@ -22,7 +23,7 @@ cd my-project
 go mod init <modulepath>
 ```
 
-A `go.mod` file could look like this:
+`go.mod` датотека може да изгледа овако:
 
 ```
 module cmd
@@ -31,32 +32,32 @@ go 1.16
 
 ```
 
-The built-in documentation provides an overview of all available `go mod` commands.
+Команде укључују и њихову документацију која образлаже све присутне `go mod` команде.
 
 ```sh
 go help mod
 go help mod init
 ```
 
-## Go Linting
+## Статична анализа Гоу кода (Linting)
 
-An improvement over the default linter can be configured using [GolangCI-Lint](https://golangci-lint.run).
+Побољшана команда од за статичну анализу Гоу кода, од оне која већ долази уз Гоу, може да се подеси преко [GolangCI-Lint](https://golangci-lint.run).
 
-This can be installed as follows:
+Може да се инсталира на следећи начин:
 
 ```sh
 brew install golangci-lint
 ```
 
-## Refactoring and your tooling
+## Рефакторисање и ваше алатке
 
-A big emphasis of this book is the importance of refactoring.
+Велики нагласак ове књиге је важност рефакторисања.
 
-Your tools can help you do bigger refactoring with confidence.
+Ваши алатке вам могу помоћи да са извршите већи рефакторинг са самопоуздањем.
 
-You should be familiar enough with your editor to perform the following with a simple key combination:
+Требало би да будете довољно упознати са вашим едитором/окружењем за програмирање, да би могли да извршите следеће помоћу једноставних комбинација на тастеру:
 
-- **Extract/Inline variable**. Taking magic values and giving them a name lets you simplify your code quickly.
+- **Extract/Inline variable - (??? променљива)**. Taking magic values and giving them a name lets you simplify your code quickly.
 - **Extract method/function**. It is vital to be able to take a section of code and extract functions/methods
 - **Rename**. You should be able to rename symbols across files confidently.
 - **go fmt**. Go has an opinioned formatter called `go fmt`. Your editor should run this on every file saved.
