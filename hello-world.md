@@ -334,37 +334,37 @@ func assertCorrectMessage(t testing.TB, got, want string) {
 
 Шта смо урадили?
 
-We've refactored our assertion into a new function. This reduces duplication and improves the readability of our tests. We need to pass in `t *testing.T` so that we can tell the test code to fail when we need to.
+Рефакторисали смо нашу функцију коју користимо да потврдимо да ли тест пролази, у нову функцију. Ово смањује дуплирање и побољшава читљивост наших тестова. Морамо да користимо `t *testing.T` да бисмо могли омогућимо тестовима да не прођу када нам затреба.
 
-For helper functions, it's a good idea to accept a `testing.TB` which is an interface that `*testing.T` and `*testing.B` both satisfy, so you can call helper functions from a test, or a benchmark (don't worry if words like "interface" mean nothing to you right now, it will be covered later).
+За помоћне функције, добра је идеја да користи `testing.TB` што је интерфејс који `*testing.T` and `*testing.B` прихватају, тако да можеш да користиш помоћне функције у тесту или у мерењу стандарда успешности (старословенски: "бенчмаркинг"). Не брини ако те речи као "интерфејс" не представљају ништа, биће објашњено касније.
 
-`t.Helper()` is needed to tell the test suite that this method is a helper. By doing this, when it fails, the line number reported will be in our _function call_ rather than inside our test helper. This will help other developers track down problems more easily. If you still don't understand, comment it out, make a test fail and observe the test output. Comments in Go are a great way to add additional information to your code, or in this case, a quick way to tell the compiler to ignore a line. You can comment out the `t.Helper()` code by adding two forward slashes `//` at the beginning of the line. You should see that line turn grey or change to another color than the rest of your code to indicate it's now commented out.
+`t.Helper()` је потребан да би тестовима представио да је та помоћна функција за тестирање. Уз њену помоћ, када тест не прође, бићемо извештени на о линији у датотеци у самој _употреби функције_ уместо у помоћној функцији. Ово ће помоћи и другим програмерима да лакше савладају проблеме. Ако не разумеш о чему се ради, коментариши помоћу функцију, учини да тестови не прођу и погледај грешку коју ти тестови пруже. Коментари у Гоу су одличан начин да додате више информација вашем коду, или у овом случају, брз начин да кажете компајлеру да игнорише линију кода. Можете да коментаришете `t.Helper()` код ако додате две косе црте `//` на самом почетку линије. Видећете да се линија у вашем едитору/окружењу за програмирање претвори у сиву или у неку другу боју наспрам остатак кода што означава да је сада коментарисана.
 
-When you have more than one argument of the same type \(in our case two strings\) rather than having `(got string, want string)` you can shorten it to `(got, want string)`.
+Када имате више од једног аргумента истог типа \(у нашем случају два типа string\), уместо да пишете `(got string, want string)` можете да скратите у `(got, want string)`.
 
-### Back to source control
+### Назад у контролу изворног кода
 
-Now that we are happy with the code, I would amend the previous commit so that we only check in the lovely version of our code with its test.
+Сада када сте задовољни да ваш код ради, ја бих ажурирао предходно сачувани код са овом новом, бољом верзијом са тестовима.
 
-### Discipline
+### Дисциплина
 
-Let's go over the cycle again
+Хајдемо поново кроз циклус
 
-* Write a test
-* Make the compiler pass
-* Run the test, see that it fails and check the error message is meaningful
-* Write enough code to make the test pass
-* Refactor
+* Напишите тест
+* Компајлирајте
+* Покрените тест и видите да не пролази, проверите коју грешку вам даје и утврдите да је смислена
+* Напишите довољно кода да учините тестове да прођу
+* Рефакторишите
 
-On the face of it this may seem tedious but sticking to the feedback loop is important.
+На приви поглед ово изгледа заморно али је важно да се држите овог приступа.
 
-Not only does it ensure that you have _relevant tests_, it helps ensure _you design good software_ by refactoring with the safety of tests.
+Не само да ово осигурава да напишете _важеће тестове_, такоће вам помаже да _дизајнирате добар софтвер_ уз рефакторисања са безбедношћу који вам пружају тестови.
 
-Seeing the test fail is an important check because it also lets you see what the error message looks like. As a developer it can be very hard to work with a codebase when failing tests do not give a clear idea as to what the problem is.
+Видети да тест није успео је важна провера јер вам омогућава да видите како изгледа порука о грешци. Као програмеру може бити веома тешко да радите са кода када неуспели тестови не дају јасну представу о томе у чему је проблем.
 
-By ensuring your tests are _fast_ and setting up your tools so that running tests is simple you can get in to a state of flow when writing your code.
+Када знате да су ваши тестови _брзи_ и постављањем вашег алата тако да је покретање тестова једноставно, можете ући у стање где течно пишете свој код.
 
-By not writing tests, you are committing to manually checking your code by running your software, which breaks your state of flow. You won't be saving yourself any time, especially in the long run.
+Ако не пиште тестове, ви се обавезујете да "ручно" проверавате ваш код, који ће ометати ваш рад. Нећете уштедети на времену, нарочито дугорочно.
 
 ## Keep going! More requirements
 
