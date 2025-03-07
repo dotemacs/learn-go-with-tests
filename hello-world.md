@@ -150,7 +150,7 @@ General:
 ...
 ```
 
-Гоува друга алатка за прегледање документације је pkgsite команда, која стоји иза Гоуве знваниче веб странице за преглед пакета. Можете да инсталирате pkgsite са `go install golang.org/x/pkgsite/cmd/pkgsite@latest`, а онда је покрените са `pkgsite -open .`. Гоува install команда ће скинути изворни код и направиће извршни програм. За уобичајену инсталацију Гоуа, програм ће бити у `$HOME/go/bin` за Линукс и Мек ОС, и `%USERPROFILE%\go\bin` за Виндоус. Ако већ нисте додали ове смернице вашем $PATH варијабли окружења, било би добро да то сада урадите зашто што ће олакшати коришћење алатки инсталираних од стране Гоуа.
+Гоува друга алатка за прегледање документације је pkgsite команда, која стоји иза Гоуве знваниче веб странице за преглед пакета. Можете да инсталирате pkgsite са `go install golang.org/x/pkgsite/cmd/pkgsite@latest`, а онда је покрените са `pkgsite -open .`. Гоува install команда ће скинути изворни код и направиће извршни програм. За уобичајену инсталацију Гоуа, програм ће бити у `$HOME/go/bin` за Линукс и Мек ОС, и `%USERPROFILE%\go\bin` за Виндоус. Ако већ нисте додали ове смернице вашем $PATH променљивој окружења, било би добро да то сада урадите зашто што ће олакшати коришћење алатки инсталираних од стране Гоуа.
 
 Велика већина стандардне библиотеке има одличну документацију са примерима. Било би добро да погледате [http://localhost:8080/testing](http://localhost:8080/testing) шта све имате на приступ.
 
@@ -366,13 +366,13 @@ func assertCorrectMessage(t testing.TB, got, want string) {
 
 Ако не пиште тестове, ви се обавезујете да "ручно" проверавате ваш код, који ће ометати ваш рад. Нећете уштедети на времену, нарочито дугорочно.
 
-## Keep going! More requirements
+## Идемо даље! Још захтева
 
-Goodness me, we have more requirements. We now need to support a second parameter, specifying the language of the greeting. If a language is passed in that we do not recognise, just default to English.
+Имамо још захтева. Сада требамо да подржимо још и један аргумент, где можемо да наведемо језик на којем ће бити поздрав. Ако је додан језик који не препознајемо, онда се подразумева енглески.
 
-We should be confident that we can easily use TDD to flesh out this functionality!
+Треба да будемо поуздани да лако можемо да користимо програмирања засновано на тестовима (TDD) да изведемо ово!
 
-Write a test for a user passing in Spanish. Add it to the existing suite.
+Напиши тест за корисника који користи шпански. Додај то у већ постојећи збир тестова.
 
 ```go
 	t.Run("in Spanish", func(t *testing.T) {
@@ -382,7 +382,7 @@ Write a test for a user passing in Spanish. Add it to the existing suite.
 	})
 ```
 
-Remember not to cheat! _Test first_. When you try to run the test, the compiler _should_ complain because you are calling `Hello` with two arguments rather than one.
+Немој да вараш! _Прво тестove_. Када покушаш да покренеш тестове, компајлер _треба_ да се пожали зато што користиш `Hello` са два аргумента уместо са једним.
 
 ```text
 ./hello_test.go:27:19: too many arguments in call to Hello
@@ -390,7 +390,7 @@ Remember not to cheat! _Test first_. When you try to run the test, the compiler 
     want (string)
 ```
 
-Fix the compilation problems by adding another string argument to `Hello`
+Исправи тај проблем тако што додаш још један аргумент типа string у `Hello`
 
 ```go
 func Hello(name string, language string) string {
@@ -401,7 +401,7 @@ func Hello(name string, language string) string {
 }
 ```
 
-When you try and run the test again it will complain about not passing through enough arguments to `Hello` in your other tests and in `hello.go`
+Када покушаш да покренеш тестове опет ће се жалити јер је други аргумент изостављен у другим `Hello` у твојим другим тестовима и у `hello.go`
 
 ```text
 ./hello.go:15:19: not enough arguments in call to Hello
@@ -415,7 +415,7 @@ Fix them by passing through empty strings. Now all your tests should compile _an
 hello_test.go:29: got 'Hello, Elodie' want 'Hola, Elodie'
 ```
 
-We can use `if` here to check the language is equal to "Spanish" and if so change the message
+Овде можемо да користимо `if` да проверимо да ли је језик једнак шпанском ("Spanish") и да ако јесте да променимо поруку
 
 ```go
 func Hello(name string, language string) string {
@@ -430,9 +430,9 @@ func Hello(name string, language string) string {
 }
 ```
 
-The tests should now pass.
+Тестови би сада требали да прођу.
 
-Now it is time to _refactor_. You should see some problems in the code, "magic" strings, some of which are repeated. Try and refactor it yourself, with every change make sure you re-run the tests to make sure your refactoring isn't breaking anything.
+Сада је време да се _рефакторише_. Треба да видиш неке проблем у коду, неке ствари се понављају. Пробај да рефакторише сами и при свакој промени, покрените тестове да би се уверили да ваше рефакторисање ништа не квари.
 
 ```go
 	const spanish = "Spanish"
@@ -451,13 +451,13 @@ Now it is time to _refactor_. You should see some problems in the code, "magic" 
 	}
 ```
 
-### French
+### Француски
 
-* Write a test asserting that if you pass in `"French"` you get `"Bonjour, "`
-* See it fail, check the error message is easy to read
-* Do the smallest reasonable change in the code
+* Напиши тест који потврђује да ако понудите `"French"` ви добијате `"Bonjour, "`
+* Утврдите да тестови не пролазе, постарајте се да је грешка поруке јасна
+* Урадите малу потребну измену у коду
 
-You may have written something that looks roughly like this
+Ви сте можда написали нешто што приближно изгледа овако
 
 ```go
 func Hello(name string, language string) string {
@@ -477,7 +477,7 @@ func Hello(name string, language string) string {
 
 ## `switch`
 
-When you have lots of `if` statements checking a particular value it is common to use a `switch` statement instead. We can use `switch` to refactor the code to make it easier to read and more extensible if we wish to add more language support later
+Када имате пуно `if` наредби које проверавају одређену вредност, уобичајено је да се уместо тога користи изјава `switch`. Можемо да користимо `switch` да рефакторишемо код да га учинимо читљивијим и лакшим за даље измене ако желимо да додамо подршку за више језика касније
 
 ```go
 func Hello(name string, language string) string {
@@ -498,11 +498,11 @@ func Hello(name string, language string) string {
 }
 ```
 
-Write a test to now include a greeting in the language of your choice and you should see how simple it is to extend our _amazing_ function.
+Напиши тест да подржи поздрав на језику по вашем избору и треба да осетите како је једноставно да се наша _дивна_ функција прошри.
 
-### one...last...refactor?
+### Још...једно...рефакторисање?
 
-You could argue that maybe our function is getting a little big. The simplest refactor for this would be to extract out some functionality into another function.
+Могло би се рећи да наша функција постаје превелика. Најједноставније рефакторисање би било да се извуче мали део функционалности у другу функцију.
 
 ```go
 
@@ -536,36 +536,37 @@ func greetingPrefix(language string) (prefix string) {
 }
 ```
 
-A few new concepts:
+Неколико нових концепта:
 
-* In our function signature we have made a _named return value_ `(prefix string)`.
+* У потпису наше функције направили смо _именовану повратну вредност_ `(prefix string)`.
+* То ће створити променљиву са називом `prefix` у вашој функцији.
 * This will create a variable called `prefix` in your function.
-  * It will be assigned the "zero" value. This depends on the type, for example `int`s are 0 and for `string`s it is `""`.
-    * You can return whatever it's set to by just calling `return` rather than `return prefix`.
-  * This will display in the Go Doc for your function so it can make the intent of your code clearer.
-* `default` in the switch case will be branched to if none of the other `case` statements match.
-* The function name starts with a lowercase letter. In Go, public functions start with a capital letter, and private ones start with a lowercase letter. We don't want the internals of our algorithm exposed to the world, so we made this function private.
-* Also, we can group constants in a block instead of declaring them on their own line. For readability, it's a good idea to use a line between sets of related constants.
+  * Добиће нулту вредност. То зависи од типа, на пример `int`-ови су 0 а за `string`-ове то је `""`.
+    * У функцији можете да "вратите" исход функције, помоћу return, шта год је дефинисано, уместо `return prefix`.
+  * То ће се показати у Go Doc за вашу функцију тако да можете учинити намеру вашег кода јаснијом.
+* `default` у switch наредби ће бити изабран ако се не подудара ни са једним од опција наведеним под `case`.
+* Име функције почиње са малим почетним словом. У Гоу, јавне функције почињу са великим словом и приватне почињу са малим словом. Не желимо да унутрашњост нашег алгоритма буде изложена свету, па смо ову функцију учинили приватном.
+* Такође, можемо да групишемо константе у блок уместо да их декларишемо посебно. Ради читљивости, добро правило је да се стави празна линија између група везаних константи.
 
-## Wrapping up
+## Да резимирамо
 
-Who knew you could get so much out of `Hello, world`?
+Ко би рекао да може толико да се извуче из `Hello, world`?
 
-By now you should have some understanding of:
+До сада би требали да сте разумели:
 
-### Some of Go's syntax around
+### Нешто од Гоу синтаксе везане за
 
-* Writing tests
-* Declaring functions, with arguments and return types
-* `if`, `const` and `switch`
-* Declaring variables and constants
+* Писање тестова
+* Декларисање функција, са аргументима и њиховим повратним вредностима
+* `if`, `const` и `switch`
+* Декларисање променљивих и константи
 
-### The TDD process and _why_ the steps are important
+### Процес програмирања заснован на тестовима (TDD) и _зашто_ су његови кораци битни
 
-* _Write a failing test and see it fail_ so we know we have written a _relevant_ test for our requirements and seen that it produces an _easy to understand description of the failure_
-* Writing the smallest amount of code to make it pass so we know we have working software
-* _Then_ refactor, backed with the safety of our tests to ensure we have well-crafted code that is easy to work with
+* _Напиши тест који не пролази_ тако да би написао _важећи_ тест за наше захтеве и види да даје _разумљив опис грешке зашто не пролази_
+* Напиши најмањи потребан код да задовољиш тестове да прођу тако да би знали да имамо софтвер који ради
+* _Онда_ рефакториши, подржан нашим тестовима који потврђују да имамо добро израђен код са којим је лако радити
 
-In our case, we've gone from `Hello()` to `Hello("name")` and then to `Hello("name", "French")` in small, easy-to-understand steps.
+У нашем случају, пошли смо од `Hello()` ка `Hello("name")` и онда ка `Hello("name", "French")` у малим, разумљивим корацима.
 
-Of course, this is trivial compared to "real-world" software, but the principles still stand. TDD is a skill that needs practice to develop, but by breaking problems down into smaller components that you can test, you will have a much easier time writing software.
+Наравно, ово је једноставно наспрам озбиљног софтвера, али принцип стоји. Процес програмирања заснован на тестовима (TDD) је вештина коју је потребно вежбати да би се усвојила, али раздвајањем проблема на мање делове које можете тестирати, лакше ћете програмирати.
