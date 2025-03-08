@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Learn Go with Tests](gb-readme.md)
+* [Научи Гоу са тестовима](српски-readme.md)
 
 ## Go fundamentals
 

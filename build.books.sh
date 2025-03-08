@@ -14,7 +14,7 @@ fi
 docker run --rm -v `pwd`:/data uppalabharath/pandoc-latex-cjk:latest --from=gfm+rebase_relative_paths -o learn-go-with-tests.pdf \
     -H meta.tex --pdf-engine=xelatex --variable urlcolor=blue --toc --toc-depth=1 \
     -B pdf-cover.tex \
-    gb-readme.md \
+    српски-readme.md \
     why.md \
     hello-world.md \
     integers.md \
@@ -54,7 +54,7 @@ docker run --rm -v `pwd`:/data uppalabharath/pandoc-latex-cjk:latest --from=gfm+
     anti-patterns.md
 
 docker run --rm -v `pwd`:/data pandoc/latex:latest --from=gfm+rebase_relative_paths --to=epub --file-scope title.txt -o learn-go-with-tests.epub --pdf-engine=xelatex --toc --toc-depth=1  \
-    gb-readme.md \
+    српски-readme.md \
     why.md \
     hello-world.md \
     integers.md \
