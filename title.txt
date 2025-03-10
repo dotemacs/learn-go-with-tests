@@ -1,7 +1,7 @@
 ---
-title: Learn Go with Tests
-author: Chris James
-rights:  MIT License
-lang: en-UK
+title: Научи Гоу Са Тестовима
+author: Крис Џејмс
+rights: MIT License
+lang: sr-RS
 cover-image: epub-cover.png
 ...
