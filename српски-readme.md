@@ -34,11 +34,11 @@
 
 Ја већ имам неко искуство са увођењем Гоу у програмерске тимовиме. Покушао сам различите приступе, где сам узео тим који је приступио Гоу као радознаоци, који би после постали врло ефикасни програмери који пишу системе у Гоу.
 
-### Шта није радило't work
+### Шта није радило
 
 #### Читај књигу
 
-An approach we tried was to take [плаву књигу](https://www.amazon.co.uk/Programming-Language-Addison-Wesley-Professional-Computing/dp/0134190440) и да сваке недеље дискутујемо по поглавље док радимо вежбе из њега.
+Приступ који смо покушали је био да узмемо [плаву књигу](https://www.amazon.co.uk/Programming-Language-Addison-Wesley-Professional-Computing/dp/0134190440) и да сваке недеље дискутујемо по поглавље док радимо вежбе из њега.
 
 Ја волим ту књигу али она захтева велику посвећеност. Књига је врло детаљна у објашњењима концепта, што је очигледно добро али то значи да је напредак кроз њу спор и постојан - што није за свакога.
 
@@ -87,6 +87,6 @@ An approach we tried was to take [плаву књигу](https://www.amazon.co.u
 
 ## Повратне информације
 
-* Ажурирајте путем Гитхаба [овде](https://github.com/quii/learn-go-with-tests) or [твитујте ми на @quii](https://twitter.com/quii)
+* Ажурирајте путем Гитхаба [овде](https://github.com/quii/learn-go-with-tests) или [јавите ми се на Твитеру @quii](https://twitter.com/quii)
 
 [Лиценца](https://github.com/quii/learn-go-with-tests/blob/main/LICENSE.md)
