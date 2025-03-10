@@ -55,19 +55,19 @@ brew install golangci-lint
 
 Ваше алатке вам могу помоћи да са извршите већи рефакторинг са самопоуздањем.
 
-Требало би да будете довољно упознати са вашим едитором/окружењем за програмирање, да би могли да извршите следеће помоћу једноставних комбинација на тастеру:
+Требало би да будете довољно упознати са вашим едитором/окружењем за програмирање, да би могли да урадите следеће помоћу једноставних комбинација на тастеру:
+Taking magic values and giving them a name lets you simplify your code quickly.
+- **Извучете променљиву**. Уместо насумичних (магичних) променљивих у сред кода, те вредности треба јасно именовати. Смислени називи побољшавају читљивост кода и олакшавају будуће измене.
+- **Извучете методу/функцију**. Важно је да можете да узмете део кода и да од њега изведте функцију/методу, ако је то потребно.
+- **Преименовање**. Треба да можете са поуздањем да преименујете симболе кроз све датотеке (у пројекту).
+- **go fmt**. Гоу има алатку која сортира ваш код по већ одређеном формату, који се покреће са `go fmt`. Ваш едитор треба да има могућност да га покреће сваки пут када се нека датотека у вашем едитору сачува.
+- **Покретање тестова**. Треба да можете да урадите све од говре наведеног, брзо и онда да такође брзо покренете ваше тестове да би осигурали да ваше рефакторисање није ништа покварило вашем коду.
 
-- **Extract/Inline variable - (??? променљива)**. Taking magic values and giving them a name lets you simplify your code quickly.
-- **Extract method/function**. It is vital to be able to take a section of code and extract functions/methods
-- **Rename**. You should be able to rename symbols across files confidently.
-- **go fmt**. Go has an opinioned formatter called `go fmt`. Your editor should run this on every file saved.
-- **Run tests**. You should be able to do any of the above and then quickly re-run your tests to ensure your refactoring hasn't broken anything.
+Да би вам помогло да радите са вашим кодом, треба да имате могућност да:
 
-In addition, to help you work with your code, you should be able to:
-
-- **View function signature**. You should never be unsure how to call a function in Go. Your IDE should describe a function in terms of its documentation, its parameters and what it returns.
-- **View function definition**. If it's still unclear what a function does, you should be able to jump to the source code and try and figure it out yourself.
-- **Find usages of a symbol**. Understanding a function's context can help you make decisions when refactoring.
+- **Прикажете потпис функције**. Никада не треба да имате сумњу како можете да користите функцију у Гоу. Ваше програмерско окружење треба да описује функцију, њене параметре и која је њена повратна вредност.
+- **Прикаже дефиницју функције**. Ако вам и даље није јасно шта функција ради, треба да имате могућност да видите њен код и да сами покушате да разумете како она ради.
+- **Нађете употребу симбола**. Када разумете контекст функције, ви можете да одлучите како да рефакторишете.
 
 Савладавање вашег едитора/окружењем за програмирање ће вам помоћи да се концентришете на код док ће те смањите пребацивање контекста (да не тражите горе наведене функционалности када вам затребају, него да их имате "у прстима").
 
