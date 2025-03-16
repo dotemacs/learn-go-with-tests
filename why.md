@@ -15,79 +15,107 @@
 Пуно људи бира Гоу да са њиме пише систем зато што има број опција које се надамо да ће га учинити отпорнијим да не застаре.
 
 - У поређењу са мојим предходним животом као Скала програмер где [ја описујем како ти је у њему пружено уже да се обесиш](http://www.quii.dev/Scala_-_Just_enough_rope_to_hang_yourself), Гоу има само 25 кључних речи и _пуно_ система могу бити напсани само са његовом стандардном и неколико малих додатних библиотека. Нада је да са Гоуом можеш да напишеш код и када се вратиш њему после шест месеци и даље ће имати смисла.
-- The tooling in respect to testing, benchmarking, linting & shipping is first class compared to most alternatives.
-- The standard library is brilliant.
-- Very fast compilation speed for tight feedback loops
-- The Go backward compatibility promise. It looks like Go will get generics and other features in the future but the designers have promised that even Go code you wrote 5 years ago will still build. I literally spent weeks upgrading a project from Scala 2.8 to 2.10. 
+- Алати у погледу тестирања, стандард успешности, провера синтаксе и софтверско распоређивање су првокласни у поређењу са већином алтернатива.
+- Стандардна библиотека је сјајна.
+- Веома велика брзина компилације за где брзо добијате повратне информације о вашем коду
+- Обећање компатибилности уназад. Изгледа да ће Гоу добити generics (начин да се пише код који може да ради са разним типовима) и друге карактеристике, у будућности, али дизајнери су обећали да ће чак и Гоу код који сте написали пре пет година и даље моћи да се компајлира. Ја сам буквално провео више недеља надограђујући пројекат са Скале 2.8 на 2.10.
 
-Even with all these great properties we can still make terrible systems, so we should look to the past and understand lessons in software engineering that apply no matter how shiny (or not) your language is.
+Чак и са свим тим великим својствима и даље можемо да правимо страшно
+лоше системе, тако да би требало да погледамо прошлост и разумемо
+лекције у софтверском инжењерингу која се примењују без обзира колико
+сматрате да је сјајан ваш програмски језик.
 
-In 1974 a clever software engineer called [Manny Lehman](https://en.wikipedia.org/wiki/Manny_Lehman_%28computer_scientist%29) wrote [Lehman's laws of software evolution](https://en.wikipedia.org/wiki/Lehman%27s_laws_of_software_evolution).
+1974. године паметни софтверски инжењер [Мани Лиман](https://en.wikipedia.org/wiki/Manny_Lehman_%28computer_scientist%29) написао је [Лиманов закон еволуције софтвера](https://en.wikipedia.org/wiki/Lehman%27s_laws_of_software_evolution).
 
-> The laws describe a balance between forces driving new developments on one hand, and forces that slow down progress on the other hand.
+
+> Закони описују равнотежу између снага које воде нова дешавања с
+> једне стране, а снаге које успоравају напредак с друге стране.
 
 These forces seem like important things to understand if we have any hope of not being in an endless cycle of shipping systems that turn into legacy and then get re-written over and over again.
 
-## The Law of Continuous Change
+Ове је важно да се разуме да не би живели у безнадежном стању где
+пишемо систем који постану старомодни и који се опет мора да се пишу
+као замена.
 
-> Any software system used in the real-world must change or become less and less useful in the environment
 
-It feels obvious that a system _has_ to change or it becomes less useful but how often is this ignored? 
+## Закон непрестане промене
 
-Many teams are incentivised to deliver a project on a particular date and then move on to the next project. If the software is "lucky" there is at least some kind of hand-off to another set of individuals to maintain it, but they didn't write it of course. 
+> Било који софтверски систем који се озбиљно користи мора да се промени или постане све мање користан
 
-People often concern themselves with trying to pick a framework which will help them "deliver quickly" but not focusing on the longevity of the system in terms of how it needs to evolve.
+Очигледно је да је систем _мора_ да се промени или да постане мање
+користан, али колико често се то игнорише?
 
-Even if you're an incredible software engineer, you will still fall victim to not knowing the future needs of your system. As the business changes some of the brilliant code you wrote is now no longer relevant.
+Многи тимови су подстакнути да доставе пројекат на одређени датум, а
+затим прелазе на следећи пројекат. Ако је софтвер "сретан", постоји
+барем неки процес где се пројекат да другом тиму да га одржава, који
+га нису написали.
 
-Lehman was on a roll in the 70s because he gave us another law to chew on.
+Људи се често труде на нађу начин који ће им помоћи да се пројекат
+"испоручи брзо", али не фокусирају се на дуговечност система у смислу
+како он треба да се развија даље.
 
-## The Law of Increasing Complexity
+Чак и ако сте изванредан софтвера инжењер, ипак нећете знати за будуће
+потребе вашег система. Како се пословни захтеви мењају, сјајни код
+који ви будете написали престаће да буде релевантан.
 
-> As a system evolves, its complexity increases unless work is done to reduce it
+Лиману је баш пошло 1970их зато што нам је он дао још један закон за
+размишљање.
 
-What he's saying here is we can't have software teams as blind feature factories, piling more and more features on to software in the hope it will survive in the long run. 
+## Закон о повећању сложености
 
-We **have** to keep managing the complexity of the system as the knowledge of our domain changes. 
+> Као се систем развија, његова сложеност расте, осим ако се не
+> постарате да је смањите
 
-## Refactoring
+Оно што овде каже је да не можемо имати софтверске тимове који слепо
+пишу нову функционалност, гомилајући их у софтверу у нади да ће оно
+дугорочно преживети.
 
-There are _many_ facets of software engineering that keeps software malleable, such as:
+Ми **морамо** да се старамо о комплексности систем док се знање о
+нашем домену мења.
 
-- Developer empowerment
-- Generally "good" code. Sensible separation of concerns, etc etc
-- Communication skills
-- Architecture
-- Observability
-- Deployability
-- Automated tests
-- Feedback loops
+## Рефакторисање
 
-I am going to focus on refactoring. It's a phrase that gets thrown around a lot "we need to refactor this" - said to a developer on their first day of programming without a second thought. 
+Има много аспеката у софтвер инжењерингу који чини софтвер прилагодљивим, као:
 
-Where does the phrase come from? How is refactoring just different from writing code?
+- Оснаживање програмера
+- Генерално „добар“ код. Разумно раздвајање одговорности, итд.
+- Комуникационе вештине
+- Архитектура
+- Погодност за обсервацију
+- Могућност за распоређивање
+- Аутоматизовани тестови
+- Петље повратних информација
 
-I know that I and many others have _thought_ we were doing refactoring but we were mistaken
+Фокусираћу се на рефакторисање. То је фраза која се много користи
+"морамо да рефакторишемо ово" - каже се програмеру на почетку првог
+дана на новом послу без много разматрања.
 
-[Martin Fowler describes how people are getting it wrong](https://martinfowler.com/bliki/RefactoringMalapropism.html)
+Одакле долази ова фраза? Како је рефакторисање другачије од писања кода?
 
-> However the term "refactoring" is often used when it's not appropriate. If somebody talks about a system being broken for a couple of days while they are refactoring, you can be pretty sure they are not refactoring.
+Ја знам да смо многи дуриги и ја _мислили_ да ми рефакторишемо али смо били у заблуди.
 
-So what is it?
+[Мартин Фаулер објашњава како су ту људи погрешили](https://martinfowler.com/bliki/RefactoringMalapropism.html)
 
-### Factorisation
+> Међутим, термин "рефакторисање" се често користи када није
+> прикладно. Ако неко говори о систему који не ради неколико дана, док
+> га они рефакторишу, можете бити прилично сигурни да га они не
+> рефакторишу.
 
-When learning maths at school you probably learned about factorisation. Here's a very simple example
+Па шта је онда?
 
-Calculate `1/2 + 1/4`
+### Факторизација
 
-To do this you _factorise_ the denominators, turning the expression into 
+У школи сте вероватно учили о факторизацији. Ево једноставног примера
 
-`2/4 + 1/4` which you can then turn into `3/4`. 
+Израчунај `1/2 + 1/4`
 
-We can take some important lessons from this. When we _factorise the expression_ we have **not changed the meaning of the expression**. Both of them equal `3/4` but we have made it easier for us to work with; by changing `1/2` to `2/4` it fits into our "domain" easier. 
+Да би то урадили ви _факторишете_ именилац, претварајући израз у
 
-When you refactor your code, you are trying to find ways of making your code easier to understand and "fit" into your current understanding of what the system needs to do. Crucially **you should not be changing behaviour**. 
+`2/4 + 1/4` из кога изведете `3/4`.
+
+Из овога можемо да извучемо поуку. Када ми _факторишемо израз_ ми *нисмо променили значење израза*. Оба су једнака `3/4` али ми смо их само прилагодили да нам буду лакши за рад, тако што смо променили `1/2` у `2/4` он се лакше уклопио у наш "домен".
+
+Када рефакторишете свој код, ви покушавате да нађете начин да учините ваш код лакшим за разумевање и да се "уклопи" у ваше тренутно разумевање шта систем треба да ради. Кљчно је **да ви не требате да му мењате опхођење**.
 
 #### An example in Go
 
