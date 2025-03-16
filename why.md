@@ -31,8 +31,6 @@
 > Закони описују равнотежу између снага које воде нова дешавања с
 > једне стране, а снаге које успоравају напредак с друге стране.
 
-These forces seem like important things to understand if we have any hope of not being in an endless cycle of shipping systems that turn into legacy and then get re-written over and over again.
-
 Ове је важно да се разуме да не би живели у безнадежном стању где
 пишемо систем који постану старомодни и који се опет мора да се пишу
 као замена.
@@ -40,7 +38,8 @@ These forces seem like important things to understand if we have any hope of not
 
 ## Закон непрестане промене
 
-> Било који софтверски систем који се озбиљно користи мора да се промени или постане све мање користан
+> Било који софтверски систем који се озбиљно користи мора да се
+> промени или постане све мање користан
 
 Очигледно је да је систем _мора_ да се промени или да постане мање
 користан, али колико често се то игнорише?
@@ -117,26 +116,26 @@ These forces seem like important things to understand if we have any hope of not
 
 Када рефакторишете свој код, ви покушавате да нађете начин да учините ваш код лакшим за разумевање и да се "уклопи" у ваше тренутно разумевање шта систем треба да ради. Кљчно је **да ви не требате да му мењате опхођење**.
 
-#### An example in Go
+#### Пример у Гоу
 
-Here is a function which greets `name` in a particular `language`
+Ево функције која поздравља `name` (име) на одређеном `language` (језику)
 
     func Hello(name, language string) string {
-    
+
       if language == "es" {
          return "Hola, " + name
       }
-    
+
       if language == "fr" {
          return "Bonjour, " + name
       }
-      
+
       // imagine dozens more languages
-    
+
       return "Hello, " + name
     }
 
-Having dozens of `if` statements doesn't feel good and we have a duplication of concatenating a language specific greeting with `, ` and the `name.` So I'll refactor the code.
+Имати десетине `if` израза не делује добро, а такође имамо дуплирање код спајања поздрава специфичног за језик са `,` и `name`. Зато ћу рефакторисати код.
 
     func Hello(name, language string) string {
       	return fmt.Sprintf(
@@ -145,77 +144,97 @@ Having dozens of `if` statements doesn't feel good and we have a duplication of 
       		name,
       	)
     }
-    
+
     var greetings = map[string]string {
       "es": "Hola",
       "fr": "Bonjour",
       //etc..
     }
-    
+
     func greeting(language string) string {
       greeting, exists := greetings[language]
-      
+
       if exists {
          return greeting
       }
-      
+
       return "Hello"
     }
 
-The nature of this refactor isn't actually important, what's important is I haven't changed behaviour. 
+Природа овог рефакторисања није битна, важно је да нисам променио понашање кода.
 
-When refactoring you can do whatever you like, add interfaces, new types, functions, methods etc. The only rule is you don't change behaviour
+Када рефакторишете, можете радити шта год желите – додавати интерфејсе, нове типове, функције, методе итд. Једино правило је да не мењате опхођење кода.
 
-### When refactoring code you must not be changing behaviour
+### Када рефакторишете код, не смете мењати понашање/опхђење кода
 
-This is very important. If you are changing behaviour at the same time you are doing _two_ things at once. As software engineers we learn to break systems up into different files/packages/functions/etc because we know trying to understand a big blob of stuff is hard. 
+Ово је веома важно. Ако истовремено мењате понашање, ви истовремено
+радите _два_ стварно различита посла. Као софтверски инжењери, учимо
+да поделимо системе на различите датотеке/пакете/функције/итд јер
+знамо да је тешко разумети велику гомилу нечега.
 
-We don't want to have to be thinking about lots of things at once because that's when we make mistakes. I've witnessed so many refactoring endeavours fail because the developers are biting off more than they can chew.  
+Не желимо да размишљамо о пуно ствари одједном, јер тада правимо
+грешке. Видео сам много покушаја рефакторисања који су пропали зато
+што су програмери узели више него што могу да поднесу.
 
-When I was doing factorisations in maths classes with pen and paper I would have to manually check that I hadn't changed the meaning of the expressions in my head. How do we know we aren't changing behaviour when refactoring when working with code, especially on a system that is non-trivial?
+Када сам радио факторизације на часовима математике са оловком и
+папиром, морао сам ручно да проверим да нисам променио значење израза
+у својој глави. Како знамо да не мењамо понашање када рефакторишемо
+код, посебно у систему који није тривијалан?
 
-Those who choose not to write tests will typically be reliant on manual testing. For anything other than a small project this will be a tremendous time-sink and does not scale in the long run. 
- 
-**In order to safely refactor you need unit tests** because they provide
+Они који одлуче да не пишу тестове обично ће зависити од ручног
+тестирања. За било шта осим малог пројекта, ово ће бити огроман
+губитак времена и неће бити одрживо на дуги рок.
 
-- Confidence you can reshape code without worrying about changing behaviour
-- Documentation for humans as to how the system should behave
-- Much faster and more reliable feedback than manual testing
+**Да бисте сигурно рефакторисали, потребни су вам модуларни тестови**
+јер они пружају:
 
-#### An example in Go
+- Могућност да са поуздањем можете променити код без бриге да ћете променити понашање
+- Документацију за људе о томе како систем треба да се понаша
+- Много брже и поузданије повратне информације него ручно тестирање
 
-A unit test for our `Hello` function could look like this
+#### Пример у Гоу
+
+Модуларни тест за нашу `Hello` функцију могао би изгледати овако
 
     func TestHello(t *testing.T) {
       got := Hello(“Chris”, es)
       want := "Hola, Chris"
-    
+
       if got != want {
          t.Errorf("got %q want %q", got, want)
       }
     }
 
-At the command line I can run `go test` and get immediate feedback as to whether my refactoring efforts have altered behaviour. In practice it's best to learn the magic button to run your tests within your editor/IDE. 
+На командној линији могу да покренем `go test` и добијем тренутне повратне информације о томе да ли су моји напори у рефакторисању променили понашање. У пракси је најбоље имати комбинацију на тастеру за покретање тестова унутар вашег едитора/окружења за програмирање.
 
-You want to get in to a state where you are doing 
+Желите да дођете у стање где радите
 
-- Small refactor
-- Run tests
-- Repeat
+- Мало рефакторисање
+- Покренете тестове
+- Поновите
 
-All within a very tight feedback loop so you don't go down rabbit holes and make mistakes.
+Све у оквиру веома кратког повратног круга како не бисте залазили у замке и правили грешке.
 
-Having a project where all your key behaviours are unit tested and give you feedback well under a second is a very empowering safety net to do bold refactoring when you need to. This helps us manage the incoming force of complexity that Lehman describes.
+Имати пројекат у ком су сви ваши кључни поступци модуларно тестирани и
+дају вам повратне информације за мање од секунде је веома оснажујућа
+сигурносна мрежа за смело рефакторисање када је то потребно. Ово нам
+помаже да савладамо комплексности коју Леман описује.
 
-## If unit tests are so great, why is there sometimes resistance to writing them?
+## Ако су модуларни тестови толико одлични, зашто понекад постоји отпор према њиховом писању?
 
-On the one hand you have people (like me) saying that unit tests are important for the long term health of your system because they ensure you can keep refactoring with confidence. 
+Са једне стране имате људе (као што сам ја) који кажу да су модуларни
+тестови важни за дугорочно здравље вашег система јер осигуравају да
+можете наставити са рефакторисањем са поверењем.
 
-On the other you have people describing experiences of unit tests actually _hindering_ refactoring.
+Са друге стране имате људе који описују искуства где модуларни тестови
+заправо _онемогућавају_ рефакторисање.
 
-Ask yourself, how often do you have to change your tests when refactoring? Over the years I have been on many projects with very good test coverage and yet the engineers are reluctant to refactor because of the perceived effort of changing tests.
+Питајте се, колико често морате да мењате своје тестове када
+рефакторишете? Током година био сам на многим пројектима са врло
+добрим покрићем кода тестовима и ипак су инжењери оклевали да
+рефакторишу због мишљења да ће њихова измена захтевати напор.
 
-This is the opposite of what we are promised!
+Ово је супротно од онога што нам је обећано!
 
 ### Why is this happening?
 
