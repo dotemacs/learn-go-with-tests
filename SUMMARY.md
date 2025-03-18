@@ -4,9 +4,9 @@
 
 ## Go fundamentals
 
-* [Install Go](install-go.md)
+* [Инсталирај Гоу](install-go.md)
 * [Hello, World](hello-world.md)
-* [Integers](integers.md)
+* [Целобројни тип](integers.md)
 * [Iteration](iteration.md)
 * [Arrays and slices](arrays-and-slices.md)
 * [Structs, methods & interfaces](structs-methods-and-interfaces.md)
@@ -52,7 +52,7 @@
 
 ## Meta
 
-* [Why unit tests and how to make them work for you](why.md)
+* [Зашто користити модуларно тестирање (unit tests) и како може да вам помогне](why.md)
 * [Anti-patterns](anti-patterns.md)
 * [Contributing](contributing.md)
 * [Chapter Template](template.md)
