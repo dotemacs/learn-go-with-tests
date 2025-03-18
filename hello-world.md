@@ -1,4 +1,4 @@
-# Hello, World
+# Први програм - Hello, World
 
 **[Сав код за ово поглавље може да се нађе овде](https://github.com/quii/learn-go-with-tests/tree/main/hello-world)**
 
