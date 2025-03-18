@@ -5,7 +5,7 @@
 ## Go fundamentals
 
 * [Инсталирај Гоу](install-go.md)
-* [Hello, World](hello-world.md)
+* [Први програм - Hello, World](hello-world.md)
 * [Целобројни тип](integers.md)
 * [Iteration](iteration.md)
 * [Arrays and slices](arrays-and-slices.md)
