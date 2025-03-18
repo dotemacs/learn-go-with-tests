@@ -1,8 +1,8 @@
-# Table of contents
+# Садржај
 
 * [Научи Гоу са тестовима](српски-readme.md)
 
-## Go fundamentals
+## Основе Гоу језика
 
 * [Инсталирај Гоу](install-go.md)
 * [Први програм - Hello, World](hello-world.md)
